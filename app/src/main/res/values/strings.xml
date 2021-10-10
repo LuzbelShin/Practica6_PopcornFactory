@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">PopcornFactory</string>
+    <string name="description">Welcome to Popcorn Factory, home of the best series and movies. Just lay down, make some popcorn and enjoy!</string>
+    <string name="cinema">Cinema</string>
+    <string name="startButton">Get me in!</string>
+    <string name="descriptionAux">Here goes everything</string>
+    <string name="drHouse">Dr. House</string>
+    <string name="smallville">Smallville</string>
+    <string name="drWho">Dr. Who</string>
+    <string name="bones">Bones</string>
+    <string name="suits">Suits</string>
+    <string name="friends">Friends</string>
+    <string name="milNovecientosDiecisiete">1917</string>
+    <string name="bigHero6">Big Hero 6</string>
+    <string name="leapYear">Leap Year</string>
+    <string name="menInBlack">Men In Black</string>
+    <string name="toyStory">Toy Story</string>
+    <string name="inception">Inception</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
+</resources>
