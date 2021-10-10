@@ -23,7 +23,7 @@ class CatalogActivity : AppCompatActivity() {
 
         var gridMovies:GridView = findViewById(R.id.catalogMovies)
         var gridSeries:GridView = findViewById(R.id.catalogSeries)
-        
+
         gridMovies.adapter = adapterM
         gridSeries.adapter = adapterS
     }
