@@ -1,7 +1,9 @@
 package valenzuela.carlos.popcornfactory
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -27,6 +29,13 @@ class FilmDetailsActivity : AppCompatActivity() {
                 descriptionHeader.setImageResource(header)
             }
             descriptionSinopsis.setText(sinopsis)
+        }
+
+        var button: Button = findViewById(R.id.buyTickets)
+
+        button.setOnClickListener{
+            var intent = Intent(this, SeatSelection::class.java)
+            startActivity(intent)
         }
     }
 }

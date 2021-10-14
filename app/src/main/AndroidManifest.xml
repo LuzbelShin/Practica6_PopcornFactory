@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PopCornFactory">
         <activity
+            android:name=".SeatSelection"
+            android:exported="true" />
+        <activity
             android:name=".CatalogActivity"
             android:exported="true" />
         <activity

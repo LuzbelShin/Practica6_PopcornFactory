@@ -18,4 +18,38 @@
     <string name="inception">Inception</string>
     <string name="movies">Movies</string>
     <string name="series">Series</string>
+
+    <string name="buyTickets">Buy my tickets!</string>
+    <string name="numberOfSeats">Number of seats: 20</string>
+    <string name="seatsLeft">Seats left: </string>
+    <string name="confirmButton">Confirm</string>
+    <string name="available">Available</string>
+    <string name="notAvailable">Not Available</string>
+    <string name="yours">Yours</string>
+    <string name="screen">Screen</string>
+    <string name="buyMyTicket">Buy my ticket</string>
+    <string name="name">Name: </string>
+    <string name="seat">Seat: </string>
+
+    <string name="one">01</string>
+    <string name="two">02</string>
+    <string name="three">03</string>
+    <string name="four">04</string>
+    <string name="five">05</string>
+    <string name="six">06</string>
+    <string name="seven">07</string>
+    <string name="eight">08</string>
+    <string name="nine">09</string>
+    <string name="ten">10</string>
+    <string name="eleven">11</string>
+    <string name="twelve">12</string>
+    <string name="thirteen">13</string>
+    <string name="fourteen">14</string>
+    <string name="fifteen">15</string>
+    <string name="sixteen">16</string>
+    <string name="seventeen">17</string>
+    <string name="eighteen">18</string>
+    <string name="nineteen">19</string>
+    <string name="twenty">20</string>
+
 </resources>
