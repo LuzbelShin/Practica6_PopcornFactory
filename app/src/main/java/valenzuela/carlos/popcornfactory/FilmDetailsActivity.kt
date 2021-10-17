@@ -18,24 +18,52 @@ class FilmDetailsActivity : AppCompatActivity() {
         var image: Int? = bundle!!.getInt("image")
         var header: Int? = bundle!!.getInt("header")
         var sinopsis: String? = bundle!!.getString("sinopsis")
+        var availableSeats: Int? = 20
+        var id: Int = -1
 
-        var descriptionTitle: TextView = findViewById(R.id.FilmNameDescription) as TextView
-        var descriptionHeader: ImageView = findViewById(R.id.FilmImageDescription) as ImageView
-        var descriptionSinopsis: TextView = findViewById(R.id.FilmSinopsisDescription) as TextView
+        var descriptionTitle: TextView = findViewById(R.id.FilmNameDescription)
+        var descriptionHeader: ImageView = findViewById(R.id.FilmImageDescription)
+        var descriptionSinopsis: TextView = findViewById(R.id.FilmSinopsisDescription)
+        var seatsLeft: TextView = findViewById(R.id.leftSeats)
+        var buyTicketsButton: Button = findViewById(R.id.buyTickets)
 
         if (bundle != null) {
-            descriptionTitle.setText(title)
+            availableSeats = bundle!!.getInt("availableSeats")
+            id = bundle!!.getInt("position")
+
+            descriptionTitle.text = (title)
             if (header != null) {
                 descriptionHeader.setImageResource(header)
             }
-            descriptionSinopsis.setText(sinopsis)
+            descriptionSinopsis.text = (sinopsis)
+            seatsLeft.text = ("  $availableSeats")
         }
 
-        var button: Button = findViewById(R.id.buyTickets)
 
-        button.setOnClickListener{
-            var intent = Intent(this, SeatSelection::class.java)
-            startActivity(intent)
+
+        if(availableSeats == 0){
+            //buyTicketsButton.isEnabled = false
+            buyTicketsButton.isEnabled = true
+            buyTicketsButton.setOnClickListener {
+                val intent: Intent = Intent(this, SeatSelection::class.java)
+
+                intent.putExtra("id", id)
+                intent.putExtra("name", title)
+                intent.putExtra("image", header)
+
+                this.startActivity(intent)
+            }
+        }else{
+            buyTicketsButton.isEnabled = true
+            buyTicketsButton.setOnClickListener {
+                val intent: Intent = Intent(this, SeatSelection::class.java)
+
+                intent.putExtra("id", id)
+                intent.putExtra("name", title)
+                intent.putExtra("image", header)
+
+                this.startActivity(intent)
+            }
         }
     }
 }
