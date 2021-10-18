@@ -1,5 +1,6 @@
 package valenzuela.carlos.popcornfactory
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,13 +10,14 @@ class SeatSelection : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seat_selection)
-        val titleBar: TextView = findViewById(R.id.titleSeats) as TextView
+
+        val titleBar: TextView = findViewById(R.id.titleSeats)
 
         var bundle: Bundle? = intent.extras
         var title: String? = bundle!!.getString("name")
         var image: Int? = bundle!!.getInt("image")
 
-        titleBar.setText(title)
+        titleBar.text = (title)
 
         var positionMovie: Int = -1
 
@@ -121,17 +123,12 @@ class SeatSelection : AppCompatActivity() {
             positionMovie = 20
         }
 
-        val confirm: Button = findViewById(R.id.confirmButton)
-
-        confirm.setOnClickListener {
-            Toast.makeText(this,    "Enjoy the movie", Toast.LENGTH_LONG).show()
-        }
-
-
         val row1: RadioGroup = findViewById(R.id.row1)
         val row2: RadioGroup = findViewById(R.id.row2)
         val row3: RadioGroup = findViewById(R.id.row3)
         val row4: RadioGroup = findViewById(R.id.row4)
+
+        var rb: RadioButton? = null
 
         row1.setOnCheckedChangeListener{
                 group, checkedId ->
@@ -142,8 +139,8 @@ class SeatSelection : AppCompatActivity() {
                 row4.clearCheck()
 
                 row1.check(checkedId)
-                val rb = findViewById<View>(checkedId) as RadioButton
-                rb.isEnabled = false
+
+                rb = findViewById<View>(checkedId) as RadioButton
             }
         }
 
@@ -156,8 +153,7 @@ class SeatSelection : AppCompatActivity() {
                 row4.clearCheck()
 
                 row2.check(checkedId)
-                val rb = findViewById<View>(checkedId) as RadioButton
-                rb.isEnabled = false
+                rb = findViewById<View>(checkedId) as RadioButton
             }
         }
 
@@ -170,8 +166,7 @@ class SeatSelection : AppCompatActivity() {
                 row4.clearCheck()
 
                 row3.check(checkedId)
-                val rb = findViewById<View>(checkedId) as RadioButton
-                rb.isEnabled = false
+                rb = findViewById<View>(checkedId) as RadioButton
             }
         }
 
@@ -184,10 +179,26 @@ class SeatSelection : AppCompatActivity() {
                 row3.clearCheck()
 
                 row4.check(checkedId)
-                val radio: RadioButton = group.findViewById(checkedId)
-                radio.isEnabled = false
+                rb = findViewById<View>(checkedId) as RadioButton
             }
         }
+
+        val confirm: Button = findViewById(R.id.confirmButton)
+
+        confirm.setOnClickListener {
+
+                rb!!.isEnabled = false
+
+                Toast.makeText(this, "Enjoy the movie", Toast.LENGTH_LONG).show()
+                val intent: Intent = Intent(this, PaymentResumeActivity::class.java)
+
+                intent.putExtra("id", positionMovie)
+                intent.putExtra("name", title)
+                intent.putExtra("image", image)
+
+                this.startActivity(intent)
+            }
+
     }
 
 }

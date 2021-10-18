@@ -18,7 +18,7 @@ class FilmDetailsActivity : AppCompatActivity() {
         var image: Int? = bundle!!.getInt("image")
         var header: Int? = bundle!!.getInt("header")
         var sinopsis: String? = bundle!!.getString("sinopsis")
-        var availableSeats: Int? = 20
+        var availableSeats: Int? = bundle!!.getInt("seats")
         var id: Int = -1
 
         var descriptionTitle: TextView = findViewById(R.id.FilmNameDescription)
@@ -28,9 +28,6 @@ class FilmDetailsActivity : AppCompatActivity() {
         var buyTicketsButton: Button = findViewById(R.id.buyTickets)
 
         if (bundle != null) {
-            availableSeats = bundle!!.getInt("availableSeats")
-            id = bundle!!.getInt("position")
-
             descriptionTitle.text = (title)
             if (header != null) {
                 descriptionHeader.setImageResource(header)
@@ -42,17 +39,7 @@ class FilmDetailsActivity : AppCompatActivity() {
 
 
         if(availableSeats == 0){
-            //buyTicketsButton.isEnabled = false
-            buyTicketsButton.isEnabled = true
-            buyTicketsButton.setOnClickListener {
-                val intent: Intent = Intent(this, SeatSelection::class.java)
-
-                intent.putExtra("id", id)
-                intent.putExtra("name", title)
-                intent.putExtra("image", header)
-
-                this.startActivity(intent)
-            }
+            buyTicketsButton.isEnabled = false
         }else{
             buyTicketsButton.isEnabled = true
             buyTicketsButton.setOnClickListener {

@@ -411,7 +411,7 @@
             android:layout_height="wrap_content"
             android:text="@string/available"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/smallGray"
             />
@@ -430,7 +430,7 @@
             android:layout_height="wrap_content"
             android:text="@string/notAvailable"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/smallGray"
             />
@@ -449,7 +449,7 @@
             android:layout_height="wrap_content"
             android:text="@string/yours"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/smallGray"
             />

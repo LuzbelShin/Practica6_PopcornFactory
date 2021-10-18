@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PopCornFactory">
         <activity
+            android:name=".PaymentResumeActivity"
+            android:exported="true" />
+        <activity
             android:name=".SeatSelection"
             android:exported="true" />
         <activity

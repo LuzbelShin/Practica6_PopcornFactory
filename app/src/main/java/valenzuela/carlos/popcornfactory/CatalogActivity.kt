@@ -16,10 +16,18 @@ class CatalogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
-        loadShows()
+        loadFilms()
 
         val adapterM = FilmAdapter(this, movies)
         val adapterS = FilmAdapter(this, series)
+
+        var bundle: Bundle? = intent.extras
+
+        var title: String? = bundle!!.getString("title")
+        var name: String? = bundle!!.getString("name")
+        var seat: Int? = bundle!!.getInt("seat")
+
+        modifyFilms(title!!, name!!, seat!!)
 
         val gridMovies:GridView = findViewById(R.id.catalogMovies)
         val gridSeries:GridView = findViewById(R.id.catalogSeries)
@@ -28,7 +36,7 @@ class CatalogActivity : AppCompatActivity() {
         gridSeries.adapter = adapterS
     }
 
-    private fun loadShows(){
+    private fun loadFilms(){
         movies.add(Film("Big Hero 6",R.drawable.bighero6, R.drawable.bighero6header, "When a devastating event befalls the city of San Fransokyo and catapults Hiro into the midst of danger, he turns to Baymax and his close friends adrenaline junkie Go Go Tomago, neatnik Wasabi, chemistry whiz Honey Lemon and fanboy Fred. Determined to uncover the mystery, Hiro transforms his friends into a band of high-tech heroes called ‘Big Hero 6.’", arrayListOf()))
         movies.add(Film("Inception",R.drawable.inception, R.drawable.inceptionheader, "Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible, inception. Instead of the perfect heist, Cobb and his team of specialists have to pull off the reverse: their task is not to steal an idea, but to plant one. If they succeed, it could be the perfect crime. But no amount of careful planning or expertise can prepare the team for the dangerous enemy that seems to predict their every move. An enemy that only Cobb could have seen coming.", arrayListOf()))
         movies.add(Film("Leap Year", R.drawable.leapyear, R.drawable.leapyearheader, "A woman who has an elaborate scheme to propose to her boyfriend on Leap Day, an Irish tradition which occurs every time the date February 29 rolls around, faces a major setback when bad weather threatens to derail her planned trip to Dublin. With the help of an innkeeper, however, her cross-country odyssey just might result in her getting engaged.", arrayListOf()))
@@ -44,17 +52,24 @@ class CatalogActivity : AppCompatActivity() {
         series.add(Film("Bones",R.drawable.bones, R.drawable.bonesheader, "Dr. Temperance Brennan is a brilliant, but lonely, anthropologist whom is approached by an ambitious FBI agent, named Seely Booth, to help the bureau solve a series of unsolved crimes by identifying the long-dead bodies of missing persons by their bone structure. But both Agent Booth and Dr. Brennan and her team come up again a variety of interference from red tape, corruption, and local noncooperation.", arrayListOf()))
     }
 
+    private fun modifyFilms(title: String, name: String, seat: Int){
+        for (film in movies){
+            if (film.title.equals(title)){
+                film.seats.add(Client(name, "Card", seat))
+            }
+        }
+    }
     class FilmAdapter: BaseAdapter, ListAdapter {
         var context: Context? = null
-        var shows = ArrayList<Film>()
+        var films = ArrayList<Film>()
 
         constructor(context: Context, shows: ArrayList<Film>){
             this.context = context
-            this.shows = shows
+            this.films = shows
         }
 
         override fun getCount(): Int {
-            return shows.size
+            return films.size
         }
 
         override fun getItem(position: Int): Any {
@@ -66,23 +81,22 @@ class CatalogActivity : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var show = shows[position]
-            var inflator =
-                context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            var film = films[position]
+            var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var view = inflator.inflate(R.layout.cell_film, null)
             var image: ImageView = view.findViewById(R.id.filmHeader)
             var title: TextView = view.findViewById(R.id.filmTitle)
 
-            image.setImageResource(show.image)
-            title.setText(show.title)
+            image.setImageResource(film.image)
+            title.text = (film.title)
 
             image.setOnClickListener {
                 var intent= Intent(context, FilmDetailsActivity::class.java)
-                intent.putExtra("title", show.title)
-                intent.putExtra("sinopsis", show.sinopsis)
-                intent.putExtra("header", show.header)
-                intent.putExtra("image", show.image)
-                intent.putExtra("seats", (20 - show.seats.size))
+                intent.putExtra("title", film.title)
+                intent.putExtra("sinopsis", film.sinopsis)
+                intent.putExtra("header", film.header)
+                intent.putExtra("image", film.image)
+                intent.putExtra("seats", (20 - film.seats.size))
                 context!!.startActivity(intent)
             }
 
